@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 2352733763782654925}
   - component: {fileID: 4057110157940002049}
   m_Layer: 0
-  m_Name: Maus
+  m_Name: Mouse Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -517,6 +517,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e371ebf0e1ca14c8b80da4039b4974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modelBody: {fileID: 2626064837996280128}
+  mainObject: {fileID: 5675441432178074416}
+  offClickAnimation: 
 --- !u!1 &5837758024508795189
 GameObject:
   m_ObjectHideFlags: 0
