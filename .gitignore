@@ -45,3 +45,6 @@ Assets/StreamingAssets/crashlytics-build.properties
 
 .vscode/
 .DS_Store
+Assets/XR/Resources/XRSimulationRuntimeSettings.asset.meta
+Assets/XR/Temp.meta
+Assets/XR/UserSimulationSettings/Resources/XRSimulationPreferences.asset.meta
