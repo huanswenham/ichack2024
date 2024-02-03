@@ -274,6 +274,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d0bcd321fcb46c39adb51165cdc37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Object: {fileID: 0}
+  PlayerTransform: {fileID: 0}
+  range: 3
+  Go: 100
+  Camera: {fileID: 0}
 --- !u!1 &541265205
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +461,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d0bcd321fcb46c39adb51165cdc37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Object: {fileID: 1000392669}
+  PlayerTransform: {fileID: 541265206}
+  range: 3
+  Go: 100
+  Camera: {fileID: 417091895}
 --- !u!4 &1571884122
 Transform:
   m_ObjectHideFlags: 0
