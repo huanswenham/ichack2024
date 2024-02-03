@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class Interactable : MonoBehaviour
 {
@@ -17,9 +18,10 @@ public class Interactable : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (Disabled) return;
+        // if (Disabled) return;
         // Play animation when mouse off.
         if (Input.GetMouseButtonUp(0)) {
+            ShowDebug("Mouse clicked");
             RaycastHit hit;
             GameObject target = GetClickedObject(out hit);
             if (target != null && target == modelBody) {
@@ -55,5 +57,10 @@ public class Interactable : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count > 0;
+    }
+
+    private void ShowDebug(string log) {
+        GameObject debugLogger =  GameObject.FindGameObjectWithTag("DebugLogger").gameObject;
+        debugLogger.GetComponent<DebugManager>().PrintDebug(log);
     }
 }
