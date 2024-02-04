@@ -14,7 +14,7 @@ public class Interactable : MonoBehaviour
     [SerializeField]
     private string offClickAnimation = "";
 
-    private bool Disabled = true;
+    private bool Disabled = false;
 
     // Update is called once per frame
     void Update() {
