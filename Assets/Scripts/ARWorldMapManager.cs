@@ -118,6 +118,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             SaveAndDisposeWorldMap(worldMap);
             SavePrefabsData();
             Log($"Successfully written to {prefabPath}!");
+
+            NetworkManager.UploadFile(path, "./rooms/my_session.worldmap");
+            NetworkManager.UploadFile(prefabPath, "./rooms/my_session.txt");
         }
 
         void SaveAndDisposeWorldMap(ARWorldMap worldMap)

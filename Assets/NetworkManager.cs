@@ -8,18 +8,18 @@ public class NetworkManager {
     const string serverIp = "146.169.53.165";
     const int serverPort = 8080;
     const int MAX_SIZE = 2 << 20; // 2KB
-    public static void UploadFile(string filePath) {
+    public static void UploadFile(string inputPath, string outputPath) {
         using (var client = new TcpClient(serverIp, serverPort))
         using (var stream = client.GetStream())
         {
             // Read the file to send (customize the path)
             string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
-            byte[] fileBytes = File.ReadAllBytes(filePath);
+            byte[] fileBytes = File.ReadAllBytes(inputPath);
 
             // Convert to base64 and send to server (maybe no need to convert to base64, just send the bytes directly?)
             Message message = new Message {
                 type = "upload",
-                filename = filePath,
+                filename = outputPath,
                 timestamp = timestamp,
                 data = fileBytes
             };
@@ -36,7 +36,7 @@ public class NetworkManager {
         }
     }
 
-    public static void DownloadFile(string filepath) {
+    public static void DownloadFile(string inputPath, string outputPath) {
         using (var client = new TcpClient(serverIp, serverPort))
         using (var stream = client.GetStream())
         {
@@ -44,7 +44,7 @@ public class NetworkManager {
             string timestamp = PlayerPrefs.GetString("timestamp");
             Message message = new Message {
                 type = "download",
-                filename = filepath,
+                filename = inputPath,
                 timestamp = timestamp,
                 data = new byte[0]
             };
@@ -60,7 +60,7 @@ public class NetworkManager {
             // Save the file in the path
             byte[] data = new byte[bytesRead];
             Array.Copy(buffer, data, bytesRead);
-            System.IO.File.WriteAllBytes(filepath, data);
+            System.IO.File.WriteAllBytes(outputPath, data);
 
             Console.WriteLine("File received successfully!");
         }
