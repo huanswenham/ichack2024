@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5448733301685136495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 931326373708985617}
+  - component: {fileID: 3389234829359612228}
+  m_Layer: 0
+  m_Name: InventoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &931326373708985617
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5448733301685136495}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3389234829359612228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5448733301685136495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d4ab5df9d474c64b8446779c85fa3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allItems:
+  - {fileID: 11400000, guid: 4e72917c07bbe4f1f84415295a06b3f0, type: 2}
+  - {fileID: 11400000, guid: a4801925a12ce410a86c972c1d253e9e, type: 2}
+  - {fileID: 11400000, guid: f5bdc4556e5d5406eb32f89e2f6cf01a, type: 2}
+  - {fileID: 11400000, guid: 3a76b90a815d54009a0bf91c50a51e99, type: 2}
+  - {fileID: 11400000, guid: 4d7576b0ba1d443bcbbdfae8ece55cf4, type: 2}
+  - {fileID: 11400000, guid: 923a9b945b0c04c5eb91bccd69f3c492, type: 2}
+  - {fileID: 11400000, guid: 053cf3e6708f144a981a8bf4b6658b76, type: 2}
+  - {fileID: 11400000, guid: d11fac378b82843628ec7c95bc6f6f56, type: 2}
+  - {fileID: 11400000, guid: 8a9f6b8a4bb5c4c79b228c7f064b27a7, type: 2}
+  - {fileID: 11400000, guid: 8c643a51cdf9e417cbc4290c164b04e3, type: 2}
+  - {fileID: 11400000, guid: 8168d4e75e496476491b5cc53cbca1d5, type: 2}
+  playerInventory: []
+  gridLayout: {fileID: 0}
