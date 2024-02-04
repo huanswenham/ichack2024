@@ -10,16 +10,23 @@ public class ARWorldMapSpawner : MonoBehaviour
     [SerializeField]
     private GameObject placeablePrefab;
 
-    // void Start() {
-    //     SpawnAllPrefabs("123:((1.0,2,3)|(3,2,1))((5,7,3)|(3,2,3))\n123:((1,2,3)|(3,2,1))");
-    // }
+    void Start() {
+        // foreach (string id in GameState.GetInstance.Memory.Keys) {
+        //     (id = )
+        // }
+    }
 
 
-    public void SaveSpawnedObject(string id, Vector3 position, Quaternion rotation) {
-        if (!SavedSpawns.ContainsKey(id)) {
-            SavedSpawns.Add(id, new List<(string, string)>());
+    public void SaveSpawnedObject(int idx, Vector3 position, Quaternion rotation) {
+        GameObject.FindGameObjectWithTag("DebugLogger").GetComponent<DebugManager>().PrintDebug($"Saving: {idx}");                
+        if (!SavedSpawns.ContainsKey(idx.ToString())) {
+            SavedSpawns.Add(idx.ToString(), new List<(string, string)>());
         }
-        SavedSpawns[id].Add(($"({position.x},{position.y},{position.z})", $"({rotation.x},{rotation.y},{rotation.z})"));
+        // if (!GameState.GetInstance.Memory.ContainsKey(idx.ToString())) {
+        //     GameState.GetInstance.Memory.Add(idx.ToString(), new List<(Vector3, Quaternion)>());
+        // }
+        SavedSpawns[idx.ToString()].Add(($"({position.x},{position.y},{position.z})", $"({rotation.x},{rotation.y},{rotation.z})"));
+        // GameState.GetInstance.Memory[idx.ToString()].Add((position, rotation));
     }
 
     public string GetSavedSpawnsAsString() {
@@ -31,6 +38,7 @@ public class ARWorldMapSpawner : MonoBehaviour
             }
             res += "\n";
         }
+        GameObject.FindGameObjectWithTag("DebugLogger").GetComponent<DebugManager>().PrintDebug(res);                
         return res;
     }
 
@@ -38,6 +46,8 @@ public class ARWorldMapSpawner : MonoBehaviour
         string[] lines = prefabsData.Split('\n');
         foreach(string line in lines) {
             string[] parts = line.Split(new char[] { ':' }, 2, StringSplitOptions.None);
+            int idx = int.Parse(parts[0]);
+            GameObject.FindGameObjectWithTag("DebugLogger").GetComponent<DebugManager>().PrintDebug($"Spawning {idx}");                
             string poses = parts[1];
             while (poses.Length > 0) {
                 poses = GetSubstring(poses, 1, poses.Length - 1);
@@ -58,7 +68,9 @@ public class ARWorldMapSpawner : MonoBehaviour
                 Vector3 rotVec = new Vector3(float.Parse(rotNums[0]), float.Parse(rotNums[1]), float.Parse(rotNums[2]));
 
                 GameObject.FindGameObjectWithTag("DebugLogger").GetComponent<DebugManager>().PrintDebug($"Spawning: {posVec}, {rotVec}");                
-                Instantiate(placeablePrefab, posVec, Quaternion.Euler(rotVec));
+                GameObject newItem = Instantiate(GameState.GetInstance.GetAllAvailableItems()[idx].modelPrefab, posVec, Quaternion.Euler(rotVec));
+                newItem.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);    
+
                 GameObject.FindGameObjectWithTag("DebugLogger").GetComponent<DebugManager>().PrintDebug($"Spawed!");                
 
                 poses = rotRemain[2];

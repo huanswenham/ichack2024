@@ -81,9 +81,9 @@ public class SpawnObjectOnPlane : MonoBehaviour
 
     private void SpawnPrefab(string id, Pose hitPose)
     {
-        spawnedObject = Instantiate(placeablePrefab, hitPose.position, hitPose.rotation);
+        spawnedObject = Instantiate(GameState.GetInstance.getObjPrefab().modelPrefab, hitPose.position, hitPose.rotation);
         spawnedObject.transform.localScale = new Vector3(scale, scale, scale);
-        ARWorldMapSpawner.GetComponent<ARWorldMapSpawner>().SaveSpawnedObject(id, hitPose.position, hitPose.rotation);
+        ARWorldMapSpawner.GetComponent<ARWorldMapSpawner>().SaveSpawnedObject(GameState.GetInstance.getObjPrefab().idx, hitPose.position, hitPose.rotation);
         placedPrefabList.Add(spawnedObject);
         placedPrefabCount++;
     }

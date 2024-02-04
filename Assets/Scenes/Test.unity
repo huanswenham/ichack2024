@@ -342,7 +342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &407940187
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2076,6 +2076,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b72d355af5a548148784f84ad962171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InventoryManagerPrefab: {fileID: 5448733301685136495, guid: 87860c3121de342909c25ded90c55e29,
+    type: 3}
+  initial: {fileID: 0}
+  ARSession: {fileID: 0}
 --- !u!1 &1863369312
 GameObject:
   m_ObjectHideFlags: 0
@@ -2370,7 +2374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2056468467
 RectTransform:
   m_ObjectHideFlags: 0

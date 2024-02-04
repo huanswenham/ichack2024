@@ -8,4 +8,6 @@ public class InventoryItem : ScriptableObject
     public GameObject modelPrefab;
     public bool isLocked;
     public int scale;
+
+    public int idx = 0;
 }

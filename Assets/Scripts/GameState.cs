@@ -10,9 +10,13 @@ public class GameState
 
     private List<InventoryItem> AllItems;
 
+    private int ActiveItemIdx;
+
+    // public Dictionary<string, List<(Vector3, Quaternion)>> Memory = new();
+
     private static Lazy<GameState> LazyGameState = new(() => new GameState()); 
     public static GameState GetInstance {
-        get{
+        get {
             return LazyGameState.Value;
         }
     }
@@ -21,11 +25,20 @@ public class GameState
         return ObjPrefab;
     }
 
-    public void setObjPrefab(InventoryItem obj) {
+    public void SetObjPrefab(InventoryItem obj) {
+        // ActiveItemIdx = idx;
         ObjPrefab = obj;
     }
 
-    // public void SaveAvailableItems(List<InventoryItem> items) {
-        
-    // }
+    public void SaveAvailableItems(List<InventoryItem> items) {
+        AllItems = items;
+    }
+
+    public List<InventoryItem> GetAllAvailableItems() {
+        return AllItems;
+    }
+
+    public int GetActivePrefabIdx() {
+        return ActiveItemIdx;
+    }
 }

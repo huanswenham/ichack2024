@@ -17,7 +17,7 @@ public class InventoryUI : MonoBehaviour
 
     void UpdateInventoryUI()
     {
-        foreach (var item in inventoryManager.allItems)
+        foreach (InventoryItem item in inventoryManager.allItems)
         {
             GameObject buttonObj = Instantiate(buttonWrapper, gridLayout.transform);
             GameObject inventoryItem = Instantiate(item.modelPrefab, buttonObj.transform);  
@@ -25,6 +25,7 @@ public class InventoryUI : MonoBehaviour
             // Vector3 rotation = inventoryItem.transform.localRotation.eulerAngles;      
             // inventoryItem.transform.Rotate(rotation.x, rotation.y, rotation.z, Space.Self);
             inventoryItem.transform.Rotate(-90, 180, 0, Space.World);
+            // item.idx = i;
             //inventoryItem.GetComponentInChildren<Text>().text = item.itemName;
             buttonObj.GetComponent<Button>().onClick.AddListener(() => OnItemClick(item));
         }
@@ -38,6 +39,6 @@ public class InventoryUI : MonoBehaviour
 
     void PlaceItemInAR(InventoryItem item)
     {
-        GameState.GetInstance.setObjPrefab(item);
+        GameState.GetInstance.SetObjPrefab(item);
     }
 }
