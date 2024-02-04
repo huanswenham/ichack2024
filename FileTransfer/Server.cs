@@ -24,28 +24,36 @@ class ARMultiplayerServer
                 Console.WriteLine("Client connected.");
 
                 // Read data from the client (assuming it's a WebSocket frame)
-                byte[] buffer = new byte[MAX_BUFFER_SIZE];
-                int bytesRead = stream.Read(buffer, 0, buffer.Length);
-                string receivedMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                byte[] jsonbuffer = new byte[MAX_BUFFER_SIZE];
+                int bytesRead = stream.Read(jsonbuffer, 0, jsonbuffer.Length);
+                string receivedMessage = Encoding.UTF8.GetString(jsonbuffer, 0, bytesRead);
                 Console.WriteLine(receivedMessage);
                 Message message = new Message();
                 message.from_json(receivedMessage);
                 Console.WriteLine($"Received: {message.to_json()}");
 
                 if (message.type == "upload") {
-                    // Convert the base64 string to a byte array and write it to a file
-                    byte[] data = message.data;
-                    System.IO.File.WriteAllBytes(message.filename, data);
+                    using (var fileStream = new FileStream(message.filename, FileMode.Create))
+                    {
+                        // Read the file data from the client and write it to the FileStream
+                        byte[] buffer = new byte[1024];
+                        while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            fileStream.Write(buffer, 0, bytesRead);
+                        }
+                    }
                 } else if (message.type == "download") {
                     // Check if file present
                     if (!File.Exists(message.filename)) {
                         Console.WriteLine("File not found");
                         continue;
                     }
-                    // Read the file and send it back to the client
-                    byte[] data = System.IO.File.ReadAllBytes(message.filename);
-                    // Open filestream for transferring file
-                    stream.Write(data, 0, data.Length);
+
+                    // Read the file data
+                    byte[] fileData = File.ReadAllBytes(message.filename);
+
+                    // Send the file data to the client
+                    stream.Write(fileData, 0, fileData.Length);
                 }
             }
         }
@@ -56,18 +64,16 @@ public class Message {
     public string type;
     public string filename;
     public string timestamp;
-    public byte[] data;
 
     public string to_json() {
-        return "{\"type\":\"" + type + "\",\"filename\":\"" + filename + "\",\"timestamp\":\"" + timestamp + "\",\"data\":\"" + Convert.ToBase64String(data) + "\"}";
+        return "{\"type\":\"" + type + "\",\"filename\":\"" + filename + "\",\"timestamp\":\"" + timestamp + "\"}";
     }
 
     public void from_json(string json) {
         // Split on the colon
-        string[] parts = json.Split(':'); 
-        type = parts[1].Split('\"')[1];
-        filename = parts[2].Split('\"')[1];
-        timestamp = parts[3].Split('\"')[1];
-        data = Convert.FromBase64String(parts[4].Split('\"')[1]);
+        string[] parts = json.Split(':');
+        type = parts[1].Split('"')[1];
+        filename = parts[2].Split('"')[1];
+        timestamp = parts[3].Split('"')[1];
     }
 }
