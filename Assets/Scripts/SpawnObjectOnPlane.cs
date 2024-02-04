@@ -18,6 +18,12 @@ public class SpawnObjectOnPlane : MonoBehaviour
 
     [SerializeField]
     private GameObject placeablePrefab;
+
+    [SerializeField]
+    private GameObject DebugLogger;
+
+    [SerializeField]
+    private GameObject ARWorldMapSpawner;
     
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
@@ -48,9 +54,12 @@ public class SpawnObjectOnPlane : MonoBehaviour
         if(raycastManager.Raycast(touchPosition, s_Hits, TrackableType.PlaneWithinPolygon))
         {
             var hitPose = s_Hits[0].pose;
+            ARRaycastHit hit = s_Hits[0];
+            // ShowDebug($"plane hit: {hit.trackableId}");
             if (placedPrefabCount < maxPrefabSpawnCount)
             {
-                SpawnPrefab(hitPose);
+                // ShowDebug($"plane id: {hitPose.GetHashCode()}");
+                SpawnPrefab(hit.trackableId.ToString(), hitPose);
             }
         }
     }
@@ -60,11 +69,16 @@ public class SpawnObjectOnPlane : MonoBehaviour
         placeablePrefab = prefabType;
     }
 
-    private void SpawnPrefab(Pose hitPose)
+    private void SpawnPrefab(string id, Pose hitPose)
     {
-        spawnedObject = Instantiate(placeablePrefab,hitPose.position, hitPose.rotation);
+        spawnedObject = Instantiate(placeablePrefab, hitPose.position, hitPose.rotation);
+        ARWorldMapSpawner.GetComponent<ARWorldMapSpawner>().SaveSpawnedObject(id, hitPose.position, hitPose.rotation);
         placedPrefabList.Add(spawnedObject);
         placedPrefabCount++;
     }
 
+
+    private void ShowDebug(string log) {
+        DebugLogger.GetComponent<DebugManager>().PrintDebug(log);
+    }
 }

@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Runtime.Serialization.Json;
+using System.Text;
 #if UNITY_IOS
 using System.Collections;
 using Unity.Collections;
@@ -42,7 +44,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [SerializeField]
         Button m_LoadButton;
 
+        [SerializeField]
+        private GameObject ARWorldMapSpawner;
+
         static string path => Path.Combine(Application.persistentDataPath, "my_session.worldmap");
+        static string prefabPath => Path.Combine(Application.persistentDataPath, "my_session.txt");
 
         bool supported
         {
@@ -110,13 +116,15 @@ namespace UnityEngine.XR.ARFoundation.Samples
             request.Dispose();
 
             SaveAndDisposeWorldMap(worldMap);
+            SavePrefabsData();
+            Log($"Successfully written to {prefabPath}!");
         }
 
         void SaveAndDisposeWorldMap(ARWorldMap worldMap)
         {
-            Log("Serializing ARWorldMap to byte array...");
+            // Log("Serializing ARWorldMap to byte array...");
             var data = worldMap.Serialize(Allocator.Temp);
-            Log($"ARWorldMap has {data.Length} bytes.");
+            // Log($"ARWorldMap has {data.Length} bytes.");
 
             var file = File.Open(path, FileMode.Create);
             var writer = new BinaryWriter(file);
@@ -124,7 +132,52 @@ namespace UnityEngine.XR.ARFoundation.Samples
             writer.Close();
             data.Dispose();
             worldMap.Dispose();
-            Log($"ARWorldMap written to {path}");
+            // Log($"ARWorldMap written to {path}");
+        }
+
+        void SavePrefabsData() {
+            string prefabsData = ARWorldMapSpawner.GetComponent<ARWorldMapSpawner>().GetSavedSpawnsAsString();
+            Log(prefabsData);
+            // Dictionary<int, int> test = new Dictionary<int, int> {{123, 1}, {321, 2}};
+            WriteToFile(prefabPath, prefabsData);
+        }
+
+        // static string SerializeDictionary(Dictionary<int, int> dictionary) {
+        //     using (MemoryStream memoryStream = new MemoryStream())
+        //     {
+        //         DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Dictionary<int, int>));
+        //         jsonSerializer.WriteObject(memoryStream, dictionary);
+        //         return Encoding.Default.GetString(memoryStream.ToArray());
+        //     }
+        // }
+
+        static void WriteToFile(string filePath, string data) {   
+            // Use StreamWriter to write data into the file
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.Write(data);
+            }
+        }
+
+        string ReadPrefabSpawnsData() {
+            return ReadFromFile(prefabPath);
+        }
+
+        // static Dictionary<int, int> DeserializeDictionary(string jsonString) {
+        //     using (MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString)))
+        //     {
+        //         DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Dictionary<int, int>));
+        //         return (Dictionary<int, int>)jsonSerializer.ReadObject(memoryStream);
+        //     }
+        // }
+
+        static string ReadFromFile(string filePath) {
+            // Use StreamReader to read data from the file
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                // Read the entire content of the file
+                return reader.ReadToEnd();
+            }
         }
 
         IEnumerator Load()
@@ -180,6 +233,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             Log("Apply ARWorldMap to current session.");
             sessionSubsystem.ApplyWorldMap(worldMap);
+
+            string prefabsData = ReadPrefabSpawnsData();
+            Log($"Successfully read prefabs data file!");
+            Log(prefabsData);
+            ARWorldMapSpawner.GetComponent<ARWorldMapSpawner>().SpawnAllPrefabs(prefabsData);
         }
 #endif
 
