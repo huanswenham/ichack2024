@@ -18,17 +18,17 @@ public class Interactable : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        // if (Disabled) return;
+        if (Disabled) return;
         // Play animation when mouse off.
         if (Input.GetMouseButtonUp(0)) {
             ShowDebug("Mouse clicked");
             RaycastHit hit;
             GameObject target = GetClickedObject(out hit);
             if (target != null && target == modelBody) {
-                Debug.Log("Clicked on the modelBody!");
+                ShowDebug("Clicked on the modelBody!");
                 mainObject.GetComponent<Animator>().Play(offClickAnimation);
             } else {
-                Debug.Log("Clicked on something else!");
+                ShowDebug("Clicked on something else!");
             }
         }
     }
