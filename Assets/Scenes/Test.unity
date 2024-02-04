@@ -342,7 +342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &407940187
 RectTransform:
   m_ObjectHideFlags: 0
@@ -887,7 +887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec8f7841a4fd4624a6569aae55b4aac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPrefabSpawnCount: 5
+  maxPrefabSpawnCount: 100
   placeablePrefab: {fileID: 5675441432178074416, guid: 11152ddc72b5e234cbe6dbf49bee3e89,
     type: 3}
   DebugLogger: {fileID: 407940186}
