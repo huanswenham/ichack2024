@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Rubber Duck Orange
   m_EditorClassIdentifier: 
   itemName: Orange Rubber Duck
-  category: 
-  modelPrefab: {fileID: 0}
+  category: Decor
+  modelPrefab: {fileID: 154052, guid: 2334c851ba41a40c794cef7f2f48b4b2, type: 3}
   isLocked: 0
+  scale: 200

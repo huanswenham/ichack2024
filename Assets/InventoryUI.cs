@@ -6,9 +6,6 @@ public class InventoryUI : MonoBehaviour
 {
     public GameObject inventoryPanel;
     public GridLayoutGroup gridLayout;
-    public GameObject inventoryItemPrefab;
-    // public InventoryItem inventoryPrefab;
-    // public List<InventoryItem> inventoryListPrefab;
     public InventoryManager inventoryManager;
 
     void Start()
@@ -19,15 +16,11 @@ public class InventoryUI : MonoBehaviour
     void UpdateInventoryUI()
     {
         foreach (var item in inventoryManager.allItems)
-        // for (int i = 0; i < inventoryManager.allItems.Count; i++)
         {
-            GameObject inventoryItem = Instantiate(inventoryItemPrefab, gridLayout.transform);
-            // GameObject inventoryItem = Instantiate(inventoryListPrefab[i], gridLayout.transform);
-            
-            // inventoryItem.GetComponentInChildren<GameObject>() = item.modelPrefab;
+            GameObject inventoryItem = Instantiate(item.modelPrefab, gridLayout.transform);  
+            inventoryItem.transform.localScale = new Vector3(item.scale, item.scale, item.scale);          
             //inventoryItem.GetComponentInChildren<Text>().text = item.itemName;
-            inventoryItem.GetComponent<Button>().onClick.AddListener(() => OnItemClick(item));
-            // inventoryItem.GetComponent<Button>().onClick.AddListener(() => OnItemClick(inventoryListPrefab[i]));
+            //inventoryItem.GetComponent<Button>().onClick.AddListener(() => OnItemClick(item));
         }
     }
 

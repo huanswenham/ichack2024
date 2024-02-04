@@ -16,3 +16,4 @@ MonoBehaviour:
   category: Decor
   modelPrefab: {fileID: 148310, guid: 2a55de21f3dda49adba0e6802ba08314, type: 3}
   isLocked: 0
+  scale: 200

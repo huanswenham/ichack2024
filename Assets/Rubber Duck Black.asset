@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Rubber Duck
   category: Decor
-  modelPrefab: {fileID: 0}
+  modelPrefab: {fileID: 176708, guid: 9569d0a8b4b394d6ba862e228d0f9fec, type: 3}
   isLocked: 0
+  scale: 200
