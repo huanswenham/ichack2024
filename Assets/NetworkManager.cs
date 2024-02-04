@@ -7,7 +7,8 @@ using UnityEngine;
 public class NetworkManager {
     const string serverIp = "146.169.53.165";
     const int serverPort = 8080;
-    public static void UploadFile(string inputPath, string outputPath) {        using (var client = new TcpClient(serverIp, serverPort))
+    public static void UploadFile(string inputPath, string outputPath) {        
+        using (var client = new TcpClient(serverIp, serverPort))
         using (var stream = client.GetStream())
         {
             // Read the file to send (customize the path)
@@ -25,6 +26,8 @@ public class NetworkManager {
             Debug.Log(json);
             byte[] jsonBytes = Encoding.UTF8.GetBytes(json);
             stream.Write(jsonBytes, 0, jsonBytes.Length);
+            // Add buffer time
+            System.Threading.Thread.Sleep(1000);
 
             // Send the file to the server
             stream.Write(fileBytes, 0, fileBytes.Length);
