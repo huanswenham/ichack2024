@@ -6,7 +6,7 @@ using UnityEngine;
 public class DebugManager : MonoBehaviour
 {
     public void PrintDebug (string log) {
-        GetComponent<TextMeshProUGUI>().text += "\n";
+        GetComponent<TextMeshProUGUI>().text += ", ";
         GetComponent<TextMeshProUGUI>().text += log;
     } 
 }
