@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
@@ -31,12 +32,12 @@ public class InventoryUI : MonoBehaviour
 
     void OnItemClick(InventoryItem item)
     {
-        inventoryCanvas.SetActive(false);
         PlaceItemInAR(item);
+        SceneManager.LoadScene("Test");
     }
 
     void PlaceItemInAR(InventoryItem item)
     {
-
+        GameState.GetInstance.setObjPrefab(item);
     }
 }

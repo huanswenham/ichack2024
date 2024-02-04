@@ -27,9 +27,19 @@ public class SpawnObjectOnPlane : MonoBehaviour
     
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
+    private float scale = 0.1f;
+
     private void Awake()
     {
         raycastManager = GetComponent<ARRaycastManager>();
+    }
+
+    void Start() {
+        InventoryItem item = GameState.GetInstance.getObjPrefab();
+        if (item != null) {
+            placeablePrefab = item.modelPrefab;
+            ShowDebug("Loaded new model");
+        }
     }
 
     bool TryGetTouchPosition(out Vector2 touchPosition)
@@ -72,6 +82,7 @@ public class SpawnObjectOnPlane : MonoBehaviour
     private void SpawnPrefab(string id, Pose hitPose)
     {
         spawnedObject = Instantiate(placeablePrefab, hitPose.position, hitPose.rotation);
+        spawnedObject.transform.localScale = new Vector3(scale, scale, scale);
         ARWorldMapSpawner.GetComponent<ARWorldMapSpawner>().SaveSpawnedObject(id, hitPose.position, hitPose.rotation);
         placedPrefabList.Add(spawnedObject);
         placedPrefabCount++;
