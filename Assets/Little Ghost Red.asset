@@ -17,4 +17,4 @@ MonoBehaviour:
   modelPrefab: {fileID: 25901200661331521, guid: aaf0bae1b4fe202469a91f418e19fa04,
     type: 3}
   isLocked: 0
-  scale: 2
+  scale: 1

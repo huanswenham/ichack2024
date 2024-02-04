@@ -149,7 +149,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 72964163}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.47700003, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: 2282}
+  m_AnchoredPosition: {x: 100, y: 2061}
   m_SizeDelta: {x: 742, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &72964165
@@ -286,7 +286,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84934906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -295,7 +295,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -238}
+  m_AnchoredPosition: {x: 0, y: -279}
   m_SizeDelta: {x: 1800, y: 3000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &84934908
@@ -487,7 +487,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 400, y: 400}
+  m_Spacing: {x: 400, y: 500}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!224 &224619833
@@ -506,7 +506,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000047683716, y: 0.0003045968}
+  m_AnchoredPosition: {x: 0.000047683716, y: 0.0016826626}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &309618576
@@ -679,7 +679,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1deff94f159430bb872f3b84e5efcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryPanel: {fileID: 1313446567}
+  inventoryCanvas: {fileID: 1413163161}
+  buttonWrapper: {fileID: 7873283096764574653, guid: b27c71263e7624c789782210f701766b,
+    type: 3}
   gridLayout: {fileID: 224619832}
   inventoryManager: {fileID: 309618578}
 --- !u!1 &1136332201

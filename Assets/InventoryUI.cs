@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public GameObject inventoryPanel;
+    public GameObject inventoryCanvas;
+    public GameObject buttonWrapper;
     public GridLayoutGroup gridLayout;
     public InventoryManager inventoryManager;
 
@@ -17,16 +18,20 @@ public class InventoryUI : MonoBehaviour
     {
         foreach (var item in inventoryManager.allItems)
         {
-            GameObject inventoryItem = Instantiate(item.modelPrefab, gridLayout.transform);  
-            inventoryItem.transform.localScale = new Vector3(item.scale, item.scale, item.scale);          
+            GameObject buttonObj = Instantiate(buttonWrapper, gridLayout.transform);
+            GameObject inventoryItem = Instantiate(item.modelPrefab, buttonObj.transform);  
+            inventoryItem.transform.localScale = new Vector3(item.scale, item.scale, item.scale);    
+            // Vector3 rotation = inventoryItem.transform.localRotation.eulerAngles;      
+            // inventoryItem.transform.Rotate(rotation.x, rotation.y, rotation.z, Space.Self);
+            inventoryItem.transform.Rotate(-90, 180, 0, Space.World);
             //inventoryItem.GetComponentInChildren<Text>().text = item.itemName;
-            //inventoryItem.GetComponent<Button>().onClick.AddListener(() => OnItemClick(item));
+            buttonObj.GetComponent<Button>().onClick.AddListener(() => OnItemClick(item));
         }
     }
 
     void OnItemClick(InventoryItem item)
     {
-        inventoryPanel.SetActive(false);
+        inventoryCanvas.SetActive(false);
         PlaceItemInAR(item);
     }
 
