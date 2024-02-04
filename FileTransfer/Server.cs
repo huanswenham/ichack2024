@@ -2,8 +2,9 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.IO;
 
-class Server
+class ARMultiplayerServer
 {
     static void Main()
     {
@@ -36,13 +37,15 @@ class Server
                     byte[] data = message.data;
                     System.IO.File.WriteAllBytes(message.filename, data);
                 } else if (message.type == "download") {
+                    // Check if file present
+                    if (!File.Exists(message.filename)) {
+                        Console.WriteLine("File not found");
+                        continue;
+                    }
                     // Read the file and send it back to the client
                     byte[] data = System.IO.File.ReadAllBytes(message.filename);
                     // Open filestream for transferring file
-                    using (var fileStream = new FileStream(message.filename, FileMode.Create, FileAccess.Write))
-                    {
-                        fileStream.Write(data, 0, data.Length);
-                    }
+                    stream.Write(data, 0, data.Length);
                 }
             }
         }
